@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class HashOrder extends HashFunction{
@@ -34,19 +36,25 @@ public class HashOrder extends HashFunction{
 		// if the data had created, don't add more
 		// if the data hadn't created, add it
 		else if(ping == 1) {
-			int j=0;
+			//int j=0;
 			int check = 0;			
 			for (Integer key : h.keySet()) {
                 ArrayList<String> value1 = h.get(key);
-                if(value1.size()==0) {
-                	do {
+                	/*do {
                 		if (value1.get(j).equals(str)==true) {
                 			System.out.println("Du lieu da ton tai!!!");
                 			check = check +1;
                 			break;
                 		}
                 		j++;
-                	}while(true);
+                	}while(j<value1.size());
+                */
+                Iterator<String> itr = value1.iterator();
+                while(itr.hasNext()) {
+                	if(itr.next().equals(str)) {
+                		System.out.println("Du lieu da ton tai!!!");
+            			check = check +1;
+                	}
                 }
             }
 			if(check == 0) h.get(hash.hashCode(str)).add(str);
@@ -91,6 +99,18 @@ public class HashOrder extends HashFunction{
             }
 
 			
+		}
+	}
+	public void removeAll(Hashtable<Integer, ArrayList<String>> h ) {
+		try {
+			for (Integer key : h.keySet()) {
+            ArrayList<String> value = h.get(key);
+			value.clear();
+			h.remove(key);	
+			}	
+		}
+		catch (ConcurrentModificationException e) {
+			System.out.println("Bye!");
 		}
 	}
 

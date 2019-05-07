@@ -17,7 +17,8 @@ public class Test {
         	System.out.println("1: Them du lieu vao hashTable");
         	System.out.println("2: Loai du lieu khoi hashTable");
         	System.out.println("3: In ra hashTable");
-        	System.out.println("4: Thoat");
+        	System.out.println("4: Xoa toan bo hashTable");
+        	System.out.println("5: Thoat");
         	System.out.println("Ban muon lam gi?: ");
         	System.out.println("-----------------------------");
         	try {
@@ -36,7 +37,15 @@ public class Test {
                         System.out.println(key + " = " + value);
                     }
                 }
-                else if(choice == 4){
+                else if(choice == 4) {
+                	//try{
+                		hash.removeAll(hashTable);
+                	//}
+                	//catch(ConcurrentModificationException e) {
+                		//System.out.println("Wrong!");
+                	//}
+                }
+                else if(choice == 5){
                 	break;
                 }
                 else {
