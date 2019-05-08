@@ -2,22 +2,16 @@ package application;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.Iterator;
 
 public class HashOrder extends HashFunction{
 
-	private Scanner scanner;
-	private String str;
+	//private Scanner scanner;
+	//private String str;
 	public HashOrder() {
 		// TODO Auto-generated constructor stub
 	}
 	public void addData(Hashtable<Integer, ArrayList<String>> h,String str) {
-		//System.out.println("Nhap du lieu: ");
-		//scanner = new Scanner(System.in);
-		//String str;
-		//do {
-		//str = scanner.nextLine();
-		//}while(str.length()==0);
 		HashFunction hash = new HashFunction();
 		int ping = 0;
 		// ping : check if the key had or not ( 0 for no, 1 for yes )
@@ -36,11 +30,10 @@ public class HashOrder extends HashFunction{
 		// if the data had created, don't add more
 		// if the data hadn't created, add it
 		else if(ping == 1) {
-			int j=0;
 			int check = 0;			
 			for (Integer key : h.keySet()) {
                 ArrayList<String> value1 = h.get(key);
-                	do {
+                	/*do {
                 		if (value1.get(j).equals(str)==true) {
                 			System.out.println("Du lieu da ton tai!!!");
                 			check = check +1;
@@ -48,17 +41,19 @@ public class HashOrder extends HashFunction{
                 		}
                 		j++;
                 	}while(j<value1.size());
-                
+                */
+                Iterator<String> itr = value1.iterator();
+                while(itr.hasNext()) {
+                	if(itr.next().equals(str)) {
+                		System.out.println("Du lieu da ton tai!!!");
+            			check = check +1;
+                	}
+                }
             }
 			if(check == 0) h.get(hash.hashCode(str)).add(str);
 		}
 	}
-	public void removeData(Hashtable<Integer, ArrayList<String>> h) {
-		System.out.println("Ban muon loai bo du lieu gi?");
-		scanner = new Scanner(System.in);
-		do {
-			str = scanner.nextLine();
-		}while(str.length()==0);
+	public void removeData(Hashtable<Integer, ArrayList<String>> h,String str) {
 		HashFunction hash = new HashFunction();
 		int ping = 0;
 		// ping : check if the key had or not ( 0 for no, 1 for yes )
