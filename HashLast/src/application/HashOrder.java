@@ -1,6 +1,5 @@
 package application;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -33,15 +32,6 @@ public class HashOrder extends HashFunction{
 			int check = 0;			
 			for (Integer key : h.keySet()) {
                 ArrayList<String> value1 = h.get(key);
-                	/*do {
-                		if (value1.get(j).equals(str)==true) {
-                			System.out.println("Du lieu da ton tai!!!");
-                			check = check +1;
-                			break;
-                		}
-                		j++;
-                	}while(j<value1.size());
-                */
                 Iterator<String> itr = value1.iterator();
                 while(itr.hasNext()) {
                 	if(itr.next().equals(str)) {
@@ -69,37 +59,42 @@ public class HashOrder extends HashFunction{
 		// if ping = 1, find the data and remove it 
 		else if (ping == 1)
 		{
+			Integer remove_key = 0;
+			Integer size_of_key = 0;
 			for (Integer key : h.keySet()) {
-                ArrayList<String> value = h.get(key);
-                int i = 0;
-                do {
-                	
-                	if (value.get(i).equals(str)==true) {                	
-                		h.get(key).remove(str);
-                		System.out.print("Da loai bo du lieu: " + str);
-                	}
-                	i++;
-                	
-                }while(i<value.size());
-                if (value.size() == 0) {
-                	h.remove(key);
-                }
-            }
-
-			
+				ArrayList<String> value = h.get(key);
+				Iterator<String> itr1 = value.iterator();
+				while(itr1.hasNext()) {
+					String string = itr1.next();
+					if(string.equals(str)) {
+						remove_key = key;
+						size_of_key = value.size();
+					}
+				}		
+			}
+			if (remove_key==0) {
+				System.out.println("Chua ton tai du lieu nay");
+			}
+			else
+			{
+				if(size_of_key == 1){
+					h.remove(remove_key);
+				}
+				else {
+					ArrayList<String> remove_value = h.get(remove_key);
+					Iterator<String> remove_itr = remove_value.iterator();
+					while(remove_itr.hasNext()) {
+						String remove_str = remove_itr.next();
+						if(remove_str.equals(str)) {
+							remove_itr.remove();
+						}
+					}
+				}
+			}
 		}
 	}
-	public void removeAll(Hashtable<Integer, ArrayList<String>> h ) {
-		try {
-			for (Integer key : h.keySet()) {
-            ArrayList<String> value = h.get(key);
-			value.clear();
-			h.remove(key);	
-			}	
-		}
-		catch (ConcurrentModificationException e) {
-			System.out.println("Bye!");
-		}
+	public void clearHash(Hashtable<Integer, ArrayList<String>> h ) {		
+			h.clear();
 	}
 
 }

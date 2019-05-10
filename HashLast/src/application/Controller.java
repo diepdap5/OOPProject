@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Controller implements Initializable{
@@ -28,6 +29,8 @@ public class Controller implements Initializable{
 	// 20 buttons
 	@FXML
 		private Button button1,button2,button3,button4,button5,button6,button7,button8,button9,button10,button11,button12,button13,button14,button15,button16,button17,button18,button19,button20;
+	@FXML
+		private Label label1,label2,label3,label4,label5,myKey;
 	Hashtable<Integer, ArrayList<String>> hashTable = new Hashtable<Integer, ArrayList<String>>();
 	HashOrder hashOrder = new HashOrder();
 	HashFunction hashFunc = new HashFunction();
@@ -39,6 +42,9 @@ public class Controller implements Initializable{
 	public void setButtonOn(Integer num,String str) {
 		final int WIDTH = 62;
 		if(num==1) {
+			myKey.setVisible(true);
+			label1.setText(hashFunc.hashCode(str) + "");
+			label1.setVisible(true);
 			button1.setText(str);
 			button1.setVisible(true);
 			button1.setMaxWidth(WIDTH);
@@ -64,6 +70,8 @@ public class Controller implements Initializable{
 			button4.setMinWidth(WIDTH);
 		}
 		if(num==5) {
+			label2.setText(hashFunc.hashCode(str) + "");
+			label2.setVisible(true);
 			button5.setText(str);
 			button5.setVisible(true);
 			button5.setMaxWidth(WIDTH);
@@ -88,6 +96,8 @@ public class Controller implements Initializable{
 			button8.setMinWidth(WIDTH);
 		}
 		if(num==9) {
+			label3.setText(hashFunc.hashCode(str) + "");
+			label3.setVisible(true);
 			button9.setText(str);
 			button9.setVisible(true);
 			button9.setMaxWidth(WIDTH);
@@ -112,6 +122,8 @@ public class Controller implements Initializable{
 			button12.setMinWidth(WIDTH);
 		}
 		if(num==13) {
+			label4.setText(hashFunc.hashCode(str) + "");
+			label4.setVisible(true);
 			button13.setText(str);
 			button13.setVisible(true);
 			button13.setMaxWidth(WIDTH);
@@ -136,6 +148,8 @@ public class Controller implements Initializable{
 			button16.setMinWidth(WIDTH);
 		}
 		if(num==17) {
+			label5.setText(hashFunc.hashCode(str) + "");
+			label5.setVisible(true);
 			button17.setText(str);
 			button17.setVisible(true);
 			button17.setMaxWidth(WIDTH);
@@ -163,6 +177,8 @@ public class Controller implements Initializable{
 	}
 	public void setButtonOff(Integer num) {
 		if(num==1) {
+			myKey.setVisible(false);
+			label1.setVisible(false);
 			button1.setVisible(false);
 		}
 		if(num==2) {
@@ -178,6 +194,7 @@ public class Controller implements Initializable{
 
 		}
 		if(num==5) {
+			label2.setVisible(false);
 			button5.setVisible(false);
 
 		}
@@ -194,6 +211,7 @@ public class Controller implements Initializable{
 
 		}
 		if(num==9) {
+			label3.setVisible(false);
 			button9.setVisible(false);
 
 		}
@@ -210,6 +228,7 @@ public class Controller implements Initializable{
 
 		}
 		if(num==13) {
+			label4.setVisible(false);
 			button13.setVisible(false);
 
 		}
@@ -226,6 +245,7 @@ public class Controller implements Initializable{
 
 		}
 		if(num==17) {
+			label5.setVisible(false);
 			button17.setVisible(false);
 
 		}
@@ -247,13 +267,23 @@ public class Controller implements Initializable{
 	public void addHash(ActionEvent event) {
 		String str = myTextField.getText();
 		hashOrder.addData(hashTable, str);
+		for(Integer x=1;x<21;x++) {
+			setButtonOff(x);
+		}
 		print();		
 	}
 	public void removeHash(ActionEvent event) {
 		String str = myTextField.getText();
 		hashOrder.removeData(hashTable, str);
-		Integer x = 0;
-		for(x=1;x<21;x++) {
+		for(Integer x=1;x<21;x++) {
+			setButtonOff(x);
+		}
+		print();
+		
+	}
+	public void deleteHash(ActionEvent event) {
+		hashOrder.clearHash(hashTable);
+		for(Integer x=1;x<21;x++) {
 			setButtonOff(x);
 		}
 		print();
@@ -266,8 +296,6 @@ public class Controller implements Initializable{
 			i++;
             ArrayList<String> value = hashTable.get(key); 
             System.out.println(key);
-            
-            //System.out.println(key + " = " + value);
             Iterator<String> itr = value.iterator();
             while(itr.hasNext()) {
             	System.out.println(itr.next() + ", ");
@@ -294,29 +322,29 @@ public class Controller implements Initializable{
             }
             if(i==3) {
             	Integer k = 0;
-            	ArrayList<String> value2 = hashTable.get(key);
-            	Iterator<String> itr2 = value2.iterator();
-            	while(itr2.hasNext()) {
+            	ArrayList<String> value3 = hashTable.get(key);
+            	Iterator<String> itr3 = value3.iterator();
+            	while(itr3.hasNext()) {
             		k++;
-            		setButtonOn(k+8, itr2.next() + "");
+            		setButtonOn(k+8, itr3.next() + "");
             	}
             }
             if(i==4) {
             	Integer k = 0;
-            	ArrayList<String> value2 = hashTable.get(key);
-            	Iterator<String> itr2 = value2.iterator();
-            	while(itr2.hasNext()) {
+            	ArrayList<String> value4 = hashTable.get(key);
+            	Iterator<String> itr4 = value4.iterator();
+            	while(itr4.hasNext()) {
             		k++;
-            		setButtonOn(k+12, itr2.next() + "");
+            		setButtonOn(k+12, itr4.next() + "");
             	}
             }
-            if(i==5) {
+            if(i==5){
             	Integer k = 0;
-            	ArrayList<String> value2 = hashTable.get(key);
-            	Iterator<String> itr2 = value2.iterator();
-            	while(itr2.hasNext()) {
+            	ArrayList<String> value5 = hashTable.get(key);
+            	Iterator<String> itr5 = value5.iterator();
+            	while(itr5.hasNext()) {
             		k++;
-            		setButtonOn(k+16, itr2.next() + "");
+            		setButtonOn(k+16, itr5.next() + "");
             	}
             }
            
@@ -324,4 +352,4 @@ public class Controller implements Initializable{
 	}
 	
 	
-}
+	}
