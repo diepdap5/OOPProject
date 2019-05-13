@@ -270,7 +270,8 @@ public class Controller implements Initializable{
 		for(Integer x=1;x<21;x++) {
 			setButtonOff(x);
 		}
-		print();		
+		print();
+		myTextField.clear();
 	}
 	public void removeHash(ActionEvent event) {
 		String str = myTextField.getText();
@@ -279,6 +280,7 @@ public class Controller implements Initializable{
 			setButtonOff(x);
 		}
 		print();
+		myTextField.clear();
 		
 	}
 	public void deleteHash(ActionEvent event) {
@@ -290,17 +292,15 @@ public class Controller implements Initializable{
 	}
 	public void print() {
 		Integer i=0;
-		//setIt(button1,str);
-		//System.out.println("Added: "+ str);
 		for (Integer key : hashTable.keySet()) {
 			i++;
             ArrayList<String> value = hashTable.get(key); 
-            System.out.println(key);
+            //System.out.println(key);
             Iterator<String> itr = value.iterator();
             while(itr.hasNext()) {
-            	System.out.println(itr.next() + ", ");
+            	//System.out.println(itr.next() + ", ");
             }
-            System.out.println(i);
+            //System.out.println(i);
             
             if(i==1) {
             	Integer k = 0;

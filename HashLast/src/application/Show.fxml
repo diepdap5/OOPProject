@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="340.0" fitWidth="600.0" layoutY="1.0">
          <image>
-            <Image url="@../../../../Downloads/wallpaper" />
+            <Image url="application/images.jpg" />
          </image>
       </ImageView>
       <Button fx:id="addToHash" layoutX="317.0" layoutY="274.0" mnemonicParsing="false" onAction="#addHash" prefHeight="25.0" prefWidth="72.0" text="Add" />
